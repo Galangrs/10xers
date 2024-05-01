@@ -1,0 +1,375 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hiring Backend",
+    "description": "Description",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/admin/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "boo@example.com"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "username": {
+                  "example": "any"
+                }
+              },
+              "required": ["email", "password","username"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Account {username} created successfully"
+          },
+          "400":{
+            "description":"Email, password and username must be filled or Invalid email format"
+          },
+          "403":{
+            "description":"Ip Blocked"
+          }
+        }
+      }
+    },
+    "/public/register": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "joo@example.com"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "username": {
+                  "example": "any"
+                },
+								"required": ["email", "password","username"]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Account {username} created successfully"
+          },
+          "400":{
+            "description":"Email, password and username must be filled or Invalid email format"
+          }
+        }
+      }
+    },
+    "/public/login": {
+      "post": {
+        "description": "",
+				"required": true,
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "joo@example.com"
+                },
+                "password": {
+                  "example": "any"
+                },
+								"required": ["email", "password","username"]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Welcome {username}"
+          },
+					"400":{
+						"description":"Invalid email/password"
+					}
+        }
+      }
+    },
+    "/public/phone": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "brand",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "color",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "processor",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "ramCapacity",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "storageCapacity",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "screenSize",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "screenResolution",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "mainCameraResolution",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "frontCameraResolution",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "batteryCapacity",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "operatingSystem",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "max 10 item detail phone"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "brand": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "color": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any number"
+                },
+                "processor": {
+                  "example": "any"
+                },
+                "ramCapacity": {
+                  "example": "any number"
+                },
+                "storageCapacity": {
+                  "example": "any number"
+                },
+                "screenSize": {
+                  "example": "any"
+                },
+                "screenResolution": {
+                  "example": "any"
+                },
+                "mainCameraResolution": {
+                  "example": "any"
+                },
+                "frontCameraResolution": {
+                  "example": "any"
+                },
+                "batteryCapacity": {
+                  "example": "any number"
+                },
+                "operatingSystem": {
+                  "example": "any"
+                },
+								"required":["brand","type","color","price"]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Added product phone {brand} successfully"
+          },
+					"400": {
+						"description": "brand, type, color and price must be filled or price must be a non-negative number or price, ramCapacity, storageCapacity, and batteryCapacity is Number cannot String"
+					}
+        }
+      }
+    },
+    "/public/phone/{id}": {
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete product phone {brand} successfully"
+          },
+					"401":{
+						"description":"You are not authorized to access this phone data or jwt must be provided"
+					},
+					"404":{
+						"description":"Phone not found with the provided ID {id}"
+					}
+        }
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "access_token",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+								"brand": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "color": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any number"
+                },
+                "processor": {
+                  "example": "any"
+                },
+                "ramCapacity": {
+                  "example": "any number"
+                },
+                "storageCapacity": {
+                  "example": "any number"
+                },
+                "screenSize": {
+                  "example": "any"
+                },
+                "screenResolution": {
+                  "example": "any"
+                },
+                "mainCameraResolution": {
+                  "example": "any"
+                },
+                "frontCameraResolution": {
+                  "example": "any"
+                },
+                "batteryCapacity": {
+                  "example": "any number"
+                },
+                "operatingSystem": {
+                  "example": "any"
+                },
+								"required":["brand","type","color","price"]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Edit product phone {brand} successfully"
+          },
+					"400": {
+						"description":"price, ramCapacity, storageCapacity, and batteryCapacity is Number cannot String"
+					},
+					"401":{
+						"description":"You are not authorized to access this phone data or jwt must be provided"
+					},
+					"404":{
+						"description":"Phone not found with the provided ID {id}"
+					}
+        }
+      }
+    }
+  }
+}

@@ -23,8 +23,11 @@ function hadleError(err, req, res, next) {
     } else if (err.name === "UserIdNotFound") {
         status = 400;
         message = err.message;
-    } else if (err.name == "notAuthorized") {
+    } else if (err.name === "notAuthorized") {
         status = 401;
+        message = err.message;
+    } else if (err.name === "404NotFound") {
+        status = 404;
         message = err.message;
     }
     res.status(status).json({
