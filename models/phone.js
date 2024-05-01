@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Product.belongsTo(models.User, {
+            Phone.belongsTo(models.User, {
                 foreignKey: "userId",
             });
         }
@@ -61,18 +61,49 @@ module.exports = (sequelize, DataTypes) => {
                     notEmpty: {
                         msg: "Price is required",
                     },
+                    isNumeric: {
+                        msg: "price is Number cannot String",
+                    },
                 },
             },
             processor: DataTypes.STRING,
-            ramCapacity: DataTypes.INTEGER,
-            storageCapacity: DataTypes.INTEGER,
+            ramCapacity: {
+                type: DataTypes.INTEGER,
+                validate: {
+                    isNumeric: {
+                        msg: "ramCapacity is Number cannot String",
+                    },
+                },
+            },
+            storageCapacity: {
+                type: DataTypes.INTEGER,
+                validate: {
+                    isNumeric: {
+                        msg: "storageCapacity is Number cannot String",
+                    },
+                },
+            },
             screenSize: DataTypes.STRING,
             screenResolution: DataTypes.STRING,
             mainCameraResolution: DataTypes.STRING,
             frontCameraResolution: DataTypes.STRING,
-            batteryCapacity: DataTypes.INTEGER,
+            batteryCapacity: {
+                type: DataTypes.INTEGER,
+                validate: {
+                    isNumeric: {
+                        msg: "batteryCapacity is Number cannot String",
+                    },
+                },
+            },
             operatingSystem: DataTypes.STRING,
-            userId: DataTypes.INTEGER,
+            userId: {
+                type: DataTypes.INTEGER,
+                validate: {
+                    isNumeric: {
+                        msg: "userId is Number cannot String",
+                    },
+                },
+            },
         },
         {
             sequelize,

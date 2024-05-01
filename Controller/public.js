@@ -16,7 +16,7 @@ class Controller {
                 email,
                 name: username,
                 password: bcrypt.hashSync(password, 10),
-                admin:false
+                admin: false,
             });
             res.status(201).json({
                 message: `Account ${username} created successfully`,
@@ -52,7 +52,7 @@ class Controller {
                             id: userData.id,
                             username: userData.name,
                             email: userData.email,
-                            admin: userData.admin
+                            admin: userData.admin,
                         }),
                     });
                 } else {
@@ -67,6 +67,114 @@ class Controller {
                     message: "Invalid email/password",
                 };
             }
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async addPhone(req, res, next) {
+        const {
+            brand,
+            type,
+            color,
+            price,
+            processor,
+            ramCapacity,
+            storageCapacity,
+            screenSize,
+            screenResolution,
+            mainCameraResolution,
+            frontCameraResolution,
+            batteryCapacity,
+            operatingSystem,
+        } = req.body;
+        const { id: userId } = req.userData;
+        try {
+            if (!userId) {
+                throw {
+                    name: "UserIdNotFound",
+                    message: "userId not found",
+                };
+            }
+
+            if (!brand || !type || !color || !price) {
+                throw {
+                    name: "BadRequest",
+                    message: "brand, type, color and price must be filled",
+                };
+            }
+
+            if (isNaN(Number(price)) || price < 0) {
+                throw {
+                    name: "BadRequest",
+                    message: "price must be a non-negative number",
+                };
+            }
+
+            const phoneData = {
+                brand,
+                type,
+                color,
+                price,
+                processor,
+                ramCapacity,
+                storageCapacity,
+                screenSize,
+                screenResolution,
+                mainCameraResolution,
+                frontCameraResolution,
+                batteryCapacity,
+                operatingSystem,
+                userId,
+            };
+
+            const phone = await Phone.create(phoneData);
+
+            res.status(201).json({
+                message: `Added product phone ${phone.brand} successfully`,
+                phone: phone.toJSON(),
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async deletePhone(req, res, next) {
+        const { id } = req.params;
+        const { id: userId } = req.userData;
+        try {
+            if (isNaN(Number(id)) || id < 1) {
+                throw {
+                    name: "BadRequest",
+                    message: "ID must be a positive integer",
+                };
+            }
+
+            const phone = await Phone.findByPk(id);
+            if (!phone) {
+                throw {
+                    name: "BadRequest",
+                    message: `Phone not found with the provided ID ${id}`,
+                };
+            }
+
+            if (phone.id != userId) {
+                throw {
+                    name: "notAuthorized",
+                    message: "You are not authorized to access this phone data",
+                };
+            }
+
+            await Phone.destroy({
+                where: {
+                    id,
+                },
+            });
+
+            res.json({
+                message: `Delete product phone ${phone.brand} successfully`,
+                phone: phone.toJSON(),
+            });
         } catch (error) {
             next(error);
         }
