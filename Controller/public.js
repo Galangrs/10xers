@@ -298,8 +298,11 @@ class Controller {
         try {
             const whereClause = {
                 [Op.or]: [
-                    id !== undefined && id !== "" && id !== "null"
-                        ? { id: { [Op.iLike]: `%${id}%` } }
+                    !isNaN(Number(id)) &&
+                    id !== undefined &&
+                    id !== "" &&
+                    id !== "null"
+                        ? { id: { [Op.eq]: id } }
                         : undefined,
                     brand !== undefined && brand !== "" && brand !== "null"
                         ? { brand: { [Op.iLike]: `%${brand}%` } }
@@ -310,25 +313,30 @@ class Controller {
                     color !== undefined && color !== "" && color !== "null"
                         ? { color: { [Op.iLike]: `%${color}%` } }
                         : undefined,
-                    price !== undefined && price !== "" && price !== "null"
-                        ? { price: { [Op.iLike]: `%${price}%` } }
+                    !isNaN(Number(price)) &&
+                    price !== undefined &&
+                    price !== "" &&
+                    price !== "null"
+                        ? { price: { [Op.eq]: price } }
                         : undefined,
                     processor !== undefined &&
                     processor !== "" &&
                     processor !== "null"
                         ? { processor: { [Op.iLike]: `%${processor}%` } }
                         : undefined,
+                    !isNaN(Number(ramCapacity)) &&
                     ramCapacity !== undefined &&
                     ramCapacity !== "" &&
                     ramCapacity !== "null"
-                        ? { ramCapacity: { [Op.iLike]: `%${ramCapacity}%` } }
+                        ? { ramCapacity: { [Op.eq]: ramCapacity } }
                         : undefined,
+                    !isNaN(Number(storageCapacity)) &&
                     storageCapacity !== undefined &&
                     storageCapacity !== "" &&
                     storageCapacity !== "null"
                         ? {
                               storageCapacity: {
-                                  [Op.iLike]: `%${storageCapacity}%`,
+                                  [Op.eq]: storageCapacity,
                               },
                           }
                         : undefined,
@@ -364,12 +372,13 @@ class Controller {
                               },
                           }
                         : undefined,
+                    !isNaN(Number(batteryCapacity)) &&
                     batteryCapacity !== undefined &&
                     batteryCapacity !== "" &&
                     batteryCapacity !== "null"
                         ? {
                               batteryCapacity: {
-                                  [Op.iLike]: `%${batteryCapacity}%`,
+                                  [Op.eq]: batteryCapacity,
                               },
                           }
                         : undefined,
@@ -389,17 +398,6 @@ class Controller {
 
             if (whereClause[Op.or].length === 0) {
                 dataPhone = await Phone.findAll({
-                    include: [
-                        {
-                            model: User,
-                            attributes: ["name"],
-                            as: "Creator",
-                        },
-                    ],
-                    limit: 10,
-                });
-            } else if (whereClause[Op.or].id) {
-                dataPhone = await Phone.findByPk(id, {
                     include: [
                         {
                             model: User,

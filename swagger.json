@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Hiring Backend",
-    "description": "Description",
+    "description": "",
     "version": "1.0.0"
   },
   "host": "localhost:8080",
@@ -13,7 +13,7 @@
   "paths": {
     "/admin/register": {
       "post": {
-        "description": "register for admin",
+        "description": "Description: Register for an admin account.\nParameters: Body must include email, password, and username.",
         "parameters": [
           {
             "name": "body",
@@ -38,7 +38,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Account {username} created successfully"
+            "description": "description Account {username} created successfully"
           },
           "400":{
             "description":"Email, password and username must be filled or Invalid email format or email and usernamemust be unique"
@@ -51,7 +51,7 @@
     },
     "/public/register": {
       "post": {
-        "description": "register for user",
+        "description": "Description: Register for a user account.\nParameters: Body must include email, password, and username.",
         "parameters": [
           {
             "name": "body",
@@ -76,7 +76,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Account {username} created successfully"
+            "description": "description Account {username} created successfully"
           },
           "400":{
             "description":"Email, password and username must be filled or Invalid email format or email and usernamemust be unique"
@@ -86,7 +86,7 @@
     },
     "/public/login": {
       "post": {
-        "description": "login account",
+        "description": "Description: Login to an account.\nParameters: Body must include email and password.",
         "parameters": [
           {
             "name": "body",
@@ -108,7 +108,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Welcome {username}"
+            "description": "description Welcome {username}"
           },
 					"400":{
 						"description":"Invalid email/password"
@@ -118,7 +118,7 @@
     },
     "/public/phone": {
       "get": {
-        "description": "for get data phone",
+        "description": "Description: Search data for phones. Allows querying by various parameters.",
         "parameters": [
           {
             "name": "id",
@@ -193,12 +193,12 @@
         ],
         "responses": {
           "200": {
-            "description": "max 10 item detail phone"
+            "description": "description max 10 item detail phone"
           }
         }
       },
       "post": {
-        "description": "add product phone",
+        "description": "Description: Add a product phone.\nParameters: Access_token from route POST /public/login response key jwt. Body must include brand, type, color, and price.",
         "parameters": [
           {
             "name": "access_token",
@@ -259,17 +259,17 @@
         ],
         "responses": {
           "201": {
-            "description": "Added product phone {brand} successfully"
+            "description": "description Added product phone {brand} successfully"
           },
 					"400": {
-						"description": "brand, type, color and price must be filled or price must be a non-negative number or price, ramCapacity, storageCapacity, and batteryCapacity is Number cannot String"
+						"description": "description brand, type, color and price must be filled or price must be a non-negative number or price, ramCapacity, storageCapacity, and batteryCapacity is Number cannot String"
 					}
         }
       }
     },
     "/public/phone/{id}": {
       "delete": {
-        "description": "delete product phone",
+        "description": "Description: Delete a product phone.\nParameters: Access_token from route POST /public/login response key jwt. ID from route GET /public/phone response key id.",
         "parameters": [
           {
             "name": "id",
@@ -286,7 +286,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Delete product phone {brand} successfully"
+            "description": "description Delete product phone {brand} successfully"
           },
 					"401":{
 						"description":"You are not authorized to access this phone data or jwt must be provided"
@@ -297,7 +297,7 @@
         }
       },
       "patch": {
-        "description": "update product phone",
+        "description": "Description: Update a product phone.\nParameters: Access_token from route POST /public/login response key jwt. ID from route GET /public/phone response key id. Body with updated phone details.",
         "parameters": [
           {
             "name": "id",
@@ -362,7 +362,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Edit product phone {brand} successfully"
+            "description": "description Edit product phone {brand} successfully"
           },
 					"400": {
 						"description":"price, ramCapacity, storageCapacity, and batteryCapacity is Number cannot String"

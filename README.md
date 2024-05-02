@@ -191,4 +191,4 @@ http://localhost:8080/api-docs
 
 ## Video:
 
-video demonstrating the implemented APIs and their functionalities has been provided. [Link to Video](https://drive.google.com/file/d/19CShV13XDJ3aZ6c9LBy4xuPYHs2Jbx9b/view?usp=sharing)
+video demonstrating the implemented APIs and their functionalities has been provided. [Link to Video](https://drive.google.com/file/d/1JuBur87Gip9PDfrQxCCNfCSkS5CFxeyF/view?usp=sharing)
