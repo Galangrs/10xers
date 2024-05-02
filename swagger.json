@@ -61,7 +61,7 @@
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "boo@example.com"
+                  "example": "joo@example.com"
                 },
                 "password": {
                   "example": "password"
@@ -120,6 +120,11 @@
       "get": {
         "description": "",
         "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "string"
+          },
           {
             "name": "brand",
             "in": "query",

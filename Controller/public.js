@@ -151,7 +151,16 @@ class Controller {
                 };
             }
 
-            const phone = await Phone.findByPk(id);
+            const phone = await Phone.findByPk(id, {
+                include: [
+                    {
+                        model: User,
+                        attributes: ["id"],
+                        as: "Creator",
+                    },
+                ],
+            });
+
             if (!phone) {
                 throw {
                     name: "404NotFound",
@@ -159,7 +168,7 @@ class Controller {
                 };
             }
 
-            if (phone.id != userId && admin === false) {
+            if (phone.Creator.id != userId && admin === false) {
                 throw {
                     name: "notAuthorized",
                     message: "You are not authorized to access this phone data",
@@ -207,7 +216,16 @@ class Controller {
                 };
             }
 
-            const phone = await Phone.findByPk(id);
+            const phone = await Phone.findByPk(id, {
+                include: [
+                    {
+                        model: User,
+                        attributes: ["id"],
+                        as: "Creator",
+                    },
+                ],
+            });
+
             if (!phone) {
                 throw {
                     name: "404NotFound",
@@ -215,7 +233,7 @@ class Controller {
                 };
             }
 
-            if (phone.id != userId && admin === false) {
+            if (phone.Creator.id != userId && admin === false) {
                 throw {
                     name: "notAuthorized",
                     message: "You are not authorized to access this phone data",
@@ -248,9 +266,11 @@ class Controller {
                 }
             );
 
+            const dataPhone = await Phone.findByPk(id);
+
             res.json({
                 message: `Edit product phone ${phone.brand} successfully`,
-                phone: phone.toJSON(),
+                phone: dataPhone,
             });
         } catch (error) {
             next(error);
@@ -259,6 +279,7 @@ class Controller {
 
     static async sercPhone(req, res, next) {
         const {
+            id,
             brand,
             type,
             color,
@@ -277,6 +298,9 @@ class Controller {
         try {
             const whereClause = {
                 [Op.or]: [
+                    id !== undefined && id !== "" && id !== "null"
+                        ? { id: { [Op.iLike]: `%${id}%` } }
+                        : undefined,
                     brand !== undefined && brand !== "" && brand !== "null"
                         ? { brand: { [Op.iLike]: `%${brand}%` } }
                         : undefined,
@@ -365,6 +389,17 @@ class Controller {
 
             if (whereClause[Op.or].length === 0) {
                 dataPhone = await Phone.findAll({
+                    include: [
+                        {
+                            model: User,
+                            attributes: ["name"],
+                            as: "Creator",
+                        },
+                    ],
+                    limit: 10,
+                });
+            } else if (whereClause[Op.or].id) {
+                dataPhone = await Phone.findByPk(id, {
                     include: [
                         {
                             model: User,

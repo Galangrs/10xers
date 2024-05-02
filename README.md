@@ -82,6 +82,7 @@ http://localhost:8080/api-docs
 -   **Query Parameters:**
     ```json
     {
+        "id": 1,
         "brand": "Motorola",
         "type": "12",
         "color": "Blue",
