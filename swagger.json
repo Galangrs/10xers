@@ -246,9 +246,9 @@
                 },
                 "operatingSystem": {
                   "example": "Android 11"
-                },
-								"required":["brand","type","color","price"]
-              }
+                }
+              },
+              "required":["brand","type","color","price"]
             }
           }
         ],

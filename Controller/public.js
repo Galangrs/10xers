@@ -361,10 +361,32 @@ class Controller {
                 ].filter(Boolean),
             };
 
-            const dataPhone = await Phone.findAll({
-                where: whereClause,
-                limit: 10,
-            });
+            let dataPhone;
+
+            if (whereClause[Op.or].length === 0) {
+                dataPhone = await Phone.findAll({
+                    include: [
+                        {
+                            model: User,
+                            attributes: ["name"],
+                            as: "Creator",
+                        },
+                    ],
+                    limit: 10,
+                });
+            } else {
+                dataPhone = await Phone.findAll({
+                    where: whereClause,
+                    include: [
+                        {
+                            model: User,
+                            attributes: ["name"],
+                            as: "Creator",
+                        },
+                    ],
+                    limit: 10,
+                });
+            }
 
             res.json({ phone: dataPhone });
         } catch (error) {

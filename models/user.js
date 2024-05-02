@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             User.hasMany(models.Phone, {
+                as: "Creator",
                 foreignKey: "userId",
             });
         }
