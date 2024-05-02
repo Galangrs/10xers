@@ -31,14 +31,14 @@ http://localhost:8080/api-docs
     ```json
     {
         "email": "boo@example.com",
-        "password": "any",
-        "username": "any"
+        "password": "password",
+        "username": "admin"
     }
     ```
 
 -   **Responses:**
     -   `201`: Account {username} created successfully
-    -   `400`: Email, password, and username must be filled or Invalid email format
+    -   `400`: Email, password, and username must be filled or Invalid email format or email and usernamemust be unique
     -   `403`: IP Blocked
 
 ### Route /public/register
@@ -50,13 +50,13 @@ http://localhost:8080/api-docs
     ```json
     {
         "email": "joo@example.com",
-        "password": "any",
-        "username": "any"
+        "password": "password",
+        "username": "user"
     }
     ```
 -   **Responses:**
     -   `201`: Account {username} created successfully
-    -   `400`: Email, password, and username must be filled or Invalid email format
+    -   `400`: Email, password, and username must be filled or Invalid email format or email and usernamemust be unique
 
 ### Route /public/login
 
@@ -67,7 +67,7 @@ http://localhost:8080/api-docs
     ```json
     {
         "email": "joo@example.com",
-        "password": "any"
+        "password": "password"
     }
     ```
 -   **Responses:**
@@ -79,7 +79,24 @@ http://localhost:8080/api-docs
 -   **URL:** `/public/phone`
 -   **Method:** `GET`
 -   **Description:** Retrieve phone details.
--   **Query Parameters:** Max 10 item detail phone
+-   **Query Parameters:**
+    ```json
+    {
+        "brand": "Motorola",
+        "type": "12",
+        "color": "Blue",
+        "price": 600,
+        "processor": "Snapdragon",
+        "ramCapacity": 8,
+        "screenSize": "6.7",
+        "storageCapacity": 586,
+        "mainCameraResolution": "1080 x 2400",
+        "frontCameraResolution": "108",
+        "batteryCapacity": "32",
+        "operatingSystem": 4000,
+        "operatingSystem": "Android 11"
+    }
+    ```
 -   **Responses:**
 
     -   `200`: Max 10 item detail phone

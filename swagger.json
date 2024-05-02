@@ -26,10 +26,10 @@
                   "example": "boo@example.com"
                 },
                 "password": {
-                  "example": "any"
+                  "example": "password"
                 },
                 "username": {
-                  "example": "any"
+                  "example": "admin"
                 }
               },
               "required": ["email", "password","username"]
@@ -41,7 +41,7 @@
             "description": "Account {username} created successfully"
           },
           "400":{
-            "description":"Email, password and username must be filled or Invalid email format"
+            "description":"Email, password and username must be filled or Invalid email format or email and usernamemust be unique"
           },
           "403":{
             "description":"Ip Blocked"
@@ -56,20 +56,21 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "email": {
-                  "example": "joo@example.com"
+                  "example": "boo@example.com"
                 },
                 "password": {
-                  "example": "any"
+                  "example": "password"
                 },
                 "username": {
-                  "example": "any"
-                },
-								"required": ["email", "password","username"]
-              }
+                  "example": "user"
+                }
+              },
+              "required": ["email", "password","username"]
             }
           }
         ],
@@ -78,7 +79,7 @@
             "description": "Account {username} created successfully"
           },
           "400":{
-            "description":"Email, password and username must be filled or Invalid email format"
+            "description":"Email, password and username must be filled or Invalid email format or email and usernamemust be unique"
           }
         }
       }
@@ -86,11 +87,11 @@
     "/public/login": {
       "post": {
         "description": "",
-				"required": true,
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
@@ -98,10 +99,10 @@
                   "example": "joo@example.com"
                 },
                 "password": {
-                  "example": "any"
-                },
-								"required": ["email", "password","username"]
-              }
+                  "example": "password"
+                }
+              },
+              "required": ["email", "password","username"]
             }
           }
         ],
@@ -203,47 +204,48 @@
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "brand": {
-                  "example": "any"
+                  "example": "Motorola"
                 },
                 "type": {
-                  "example": "any"
+                  "example": "Motorola Edge 20"
                 },
                 "color": {
-                  "example": "any"
+                  "example": "Blue"
                 },
                 "price": {
-                  "example": "any number"
+                  "example": 600
                 },
                 "processor": {
-                  "example": "any"
+                  "example": "Snapdragon 778G"
                 },
                 "ramCapacity": {
-                  "example": "any number"
+                  "example": 8
                 },
                 "storageCapacity": {
-                  "example": "any number"
+                  "example": 586
                 },
                 "screenSize": {
-                  "example": "any"
+                  "example": "6.7 inches"
                 },
                 "screenResolution": {
-                  "example": "any"
+                  "example": "1080 x 2400 pixels"
                 },
                 "mainCameraResolution": {
-                  "example": "any"
+                  "example": "108 MP"
                 },
                 "frontCameraResolution": {
-                  "example": "any"
+                  "example": "32 MP"
                 },
                 "batteryCapacity": {
-                  "example": "any number"
+                  "example": 4000
                 },
                 "operatingSystem": {
-                  "example": "any"
+                  "example": "Android 11"
                 },
 								"required":["brand","type","color","price"]
               }
@@ -307,50 +309,48 @@
           {
             "name": "body",
             "in": "body",
-            "required": true,
             "schema": {
               "type": "object",
               "properties": {
 								"brand": {
-                  "example": "any"
+                  "example": "Motorola"
                 },
                 "type": {
-                  "example": "any"
+                  "example": "Motorola Edge 20"
                 },
                 "color": {
-                  "example": "any"
+                  "example": "Blue"
                 },
                 "price": {
-                  "example": "any number"
+                  "example": 600
                 },
                 "processor": {
-                  "example": "any"
+                  "example": "Snapdragon 778G"
                 },
                 "ramCapacity": {
-                  "example": "any number"
+                  "example": 8
                 },
                 "storageCapacity": {
-                  "example": "any number"
+                  "example": 256
                 },
                 "screenSize": {
-                  "example": "any"
+                  "example": "6.7 inches"
                 },
                 "screenResolution": {
-                  "example": "any"
+                  "example": "1080 x 2400 pixels"
                 },
                 "mainCameraResolution": {
-                  "example": "any"
+                  "example": "108 MP"
                 },
                 "frontCameraResolution": {
-                  "example": "any"
+                  "example": "32 MP"
                 },
                 "batteryCapacity": {
-                  "example": "any number"
+                  "example": 4000
                 },
                 "operatingSystem": {
-                  "example": "any"
-                },
-								"required":["brand","type","color","price"]
+                  "example": "Android 11"
+                }
               }
             }
           }
