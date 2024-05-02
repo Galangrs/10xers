@@ -13,7 +13,7 @@
   "paths": {
     "/admin/register": {
       "post": {
-        "description": "",
+        "description": "register for admin",
         "parameters": [
           {
             "name": "body",
@@ -51,7 +51,7 @@
     },
     "/public/register": {
       "post": {
-        "description": "",
+        "description": "register for user",
         "parameters": [
           {
             "name": "body",
@@ -86,7 +86,7 @@
     },
     "/public/login": {
       "post": {
-        "description": "",
+        "description": "login account",
         "parameters": [
           {
             "name": "body",
@@ -118,7 +118,7 @@
     },
     "/public/phone": {
       "get": {
-        "description": "",
+        "description": "for get data phone",
         "parameters": [
           {
             "name": "id",
@@ -198,7 +198,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "add product phone",
         "parameters": [
           {
             "name": "access_token",
@@ -269,7 +269,7 @@
     },
     "/public/phone/{id}": {
       "delete": {
-        "description": "",
+        "description": "delete product phone",
         "parameters": [
           {
             "name": "id",
@@ -297,7 +297,7 @@
         }
       },
       "patch": {
-        "description": "",
+        "description": "update product phone",
         "parameters": [
           {
             "name": "id",
